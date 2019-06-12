@@ -2,7 +2,7 @@ package com.bastau.app.di.module;
 
 import android.content.Context;
 
-import com.bastau.app.App;
+import com.bastau.app.Bastau;
 import com.bastau.app.di.ApplicationContext;
 
 import dagger.Module;
@@ -11,9 +11,9 @@ import dagger.Provides;
 @Module
 public class ApplicationModule {
 
-    private final App application;
+    private final Bastau application;
 
-    public ApplicationModule(App application) {
+    public ApplicationModule(Bastau application) {
         this.application = application;
     }
 
@@ -24,7 +24,7 @@ public class ApplicationModule {
     }
 
     @Provides
-    App provideApplication() {
+    Bastau provideApplication() {
         return application;
     }
 

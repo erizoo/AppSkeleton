@@ -13,6 +13,8 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+
+
         new Handler().postDelayed(() -> {
             startActivity(new Intent(getApplicationContext(), CarouselViewActivity.class));
             finish();

@@ -1,6 +1,7 @@
 package com.bastau.app.ui;
 
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +34,8 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @BindView(R.id.rv_posts)
     RecyclerView recyclerView;
+    @BindView(R.id.user_layout)
+    ConstraintLayout userLayout;
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
     @BindView(R.id.avatar)
@@ -60,6 +63,12 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
             = item -> {
         switch (item.getItemId()) {
             case R.id.navigation_dashboard:
+                skeletonScreen = Skeleton.bind(recyclerView)
+                        .adapter(postsAdapter)
+                        .load(R.layout.item_skeleton_news)
+                        .show();
+
+                presenter.getPosts();
                 title.setText("Лента");
                 avatar.setVisibility(View.GONE);
                 name.setVisibility(View.GONE);
@@ -70,6 +79,9 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
                 return true;
             case R.id.navigation_notifications:
                 title.setText("Профиль");
+                skeletonScreen = Skeleton.bind(userLayout)
+                        .load(R.layout.item_skeleton_user)
+                        .show();
                 progressBar.setVisibility(View.VISIBLE);
                 recyclerView.setVisibility(View.GONE);
                 presenter.getUser();
@@ -100,6 +112,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
                 .show();
 
         presenter.getPosts();
+
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
@@ -119,6 +132,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
     @Override
     public void onReceivedUser(ResponseAuth responseAuth) {
+        skeletonScreen.hide();
         progressBar.setVisibility(View.GONE);
         avatar.setVisibility(View.VISIBLE);
         name.setVisibility(View.VISIBLE);

@@ -1,8 +1,7 @@
 package com.bastau.app.ui;
 
 import com.arellomobile.mvp.InjectViewState;
-import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.bastau.app.App;
+import com.bastau.app.Bastau;
 import com.bastau.app.data.network.ServiceNetwork;
 import com.bastau.app.ui.base.BasePresenter;
 import com.pixplicity.easyprefs.library.Prefs;
@@ -20,7 +19,7 @@ public class MainPresenter extends BasePresenter<MainView> {
     ServiceNetwork serviceNetwork;
 
     public MainPresenter() {
-        App.getApplicationComponent().inject(this);
+        Bastau.getApplicationComponent().inject(this);
     }
 
     public void getPosts() {

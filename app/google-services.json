@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "256488922181",
+    "firebase_url": "https://bastau-app.firebaseio.com",
+    "project_id": "bastau-app",
+    "storage_bucket": "bastau-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256488922181:android:9253b7b58192eb3f",
+        "android_client_info": {
+          "package_name": "com.bastau.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256488922181-d5avi1r0qarcv1apg6s9637p1d4gvlnn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8-rA0-uf0UYdJEe9K7IEBu7T4NsKWT1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256488922181-d5avi1r0qarcv1apg6s9637p1d4gvlnn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

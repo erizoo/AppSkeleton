@@ -12,6 +12,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.bastau.app.R;
 import com.bastau.app.data.models.ResponseAuth;
 import com.bastau.app.ui.MainActivity;
+import com.pixplicity.easyprefs.library.Prefs;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

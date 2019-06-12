@@ -2,9 +2,8 @@ package com.bastau.app.ui.auth;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.bastau.app.Bastau;
-import com.bastau.app.ui.base.BasePresenter;
 import com.bastau.app.data.network.ServiceNetwork;
-import com.pixplicity.easyprefs.library.Prefs;
+import com.bastau.app.ui.base.BasePresenter;
 
 import javax.inject.Inject;
 
@@ -13,22 +12,21 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 @InjectViewState
-public class AuthPresenter extends BasePresenter<AuthView> {
+public class RegisterPresenter extends BasePresenter<RegisterView> {
 
     @Inject
     ServiceNetwork serviceNetwork;
 
-    public AuthPresenter() {
+    public RegisterPresenter() {
         Bastau.getApplicationComponent().inject(this);
     }
 
-    public void singInAuth(String login, String password) {
-        Disposable subscription = serviceNetwork.singInAuth(login, password)
+    public void registration(String phone, String password, String repeatPassword, String login, String instagram) {
+        Disposable subscription = serviceNetwork.registration(phone, password,repeatPassword,login,instagram)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(getViewState()::onLogged,
                         getViewState()::error);
         unsubscribeOnDestroy(subscription);
     }
-
 }
