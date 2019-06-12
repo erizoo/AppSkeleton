@@ -1,5 +1,6 @@
 package com.bastau.app.ui.auth;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.widget.EditText;
@@ -7,6 +8,9 @@ import android.widget.EditText;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.bastau.app.R;
+import com.bastau.app.data.models.ResponseAuth;
+import com.bastau.app.ui.MainActivity;
+import com.pixplicity.easyprefs.library.Prefs;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,5 +61,23 @@ public class RegisterActivity extends MvpAppCompatActivity implements RegisterVi
                     login.getText().toString(),
                     instagram.getText().toString());
         }
+    }
+
+    @Override
+    public void onSuccess(ResponseAuth responseAuth) {
+        if (responseAuth.getOk()) {
+            Prefs.putString("LOGIN", phone.getText().toString());
+            Prefs.putString("PASSWORD", password.getText().toString());
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Snackbar.make(login, "Ошибка авторизации", Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void error(Throwable throwable) {
+        Snackbar.make(login, "Ошибка", Snackbar.LENGTH_LONG).show();
     }
 }

@@ -11,4 +11,6 @@ public interface MainView extends MvpView {
     void error(Throwable throwable);
 
     void onReceivedUser(ResponseAuth responseAuth);
+
+    void onLiked(ResponseAuth responseAuth);
 }

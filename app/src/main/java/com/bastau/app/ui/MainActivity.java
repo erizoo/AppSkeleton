@@ -1,5 +1,7 @@
 package com.bastau.app.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.BottomNavigationView;
@@ -27,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public class MainActivity extends MvpAppCompatActivity implements MainView {
+public class MainActivity extends MvpAppCompatActivity implements MainView, PostsAdapter.Callback {
 
     @InjectPresenter
     MainPresenter presenter;
@@ -58,6 +60,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
     private Unbinder unbinder;
     private PostsAdapter postsAdapter;
     private SkeletonScreen skeletonScreen;
+    private String uri;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
@@ -101,6 +104,7 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         progressBar.setVisibility(View.GONE);
         title.setText("Лента");
         postsAdapter = new PostsAdapter();
+        postsAdapter.setCallback(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -115,6 +119,11 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    public void openInstagram(String uri, String username) {
+        this.uri = uri;
+        presenter.like(username);
     }
 
     @Override
@@ -150,5 +159,12 @@ public class MainActivity extends MvpAppCompatActivity implements MainView {
         likesGet.setText(textGetLikes);
         String textSendLikes = responseAuth.getWasLiked() + " раз лайкнул";
         likesSend.setText(textSendLikes);
+    }
+
+    @Override
+    public void onLiked(ResponseAuth responseAuth) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(uri));
+        startActivity(intent);
     }
 }

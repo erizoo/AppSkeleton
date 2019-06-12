@@ -55,6 +55,7 @@ public class AuthActivity extends MvpAppCompatActivity implements AuthView {
     @OnClick(R.id.link)
     public void registration() {
         startActivity(new Intent(this, RegisterActivity.class));
+        finish();
     }
 
     @Override
@@ -67,6 +68,8 @@ public class AuthActivity extends MvpAppCompatActivity implements AuthView {
     public void onLogged(ResponseAuth responseAuth) {
         progressBar.setVisibility(View.GONE);
         if (responseAuth.getOk()) {
+            Prefs.putString("LOGIN", login.getText().toString());
+            Prefs.putString("PASSWORD", password.getText().toString());
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();

@@ -31,4 +31,14 @@ public class ServiceNetworkImp implements ServiceNetwork {
     public Observable<ResponseAuth> getUser(String login, String password) {
         return apiMethods.singInAuth(login, password);
     }
+
+    @Override
+    public Observable<ResponseAuth> like(String login, String password, String username) {
+        return apiMethods.like(login, password, username);
+    }
+
+    @Override
+    public Observable<ResponseAuth> registration(String phone, String password, String login, String instagram) {
+        return apiMethods.registration(phone, password, login, instagram);
+    }
 }

@@ -43,4 +43,15 @@ public class MainPresenter extends BasePresenter<MainView> {
                         getViewState()::error);
         unsubscribeOnDestroy(subscription);
     }
+
+    public void like(String username) {
+        String login = Prefs.getString("LOGIN", "");
+        String password = Prefs.getString("PASSWORD", "");
+        Disposable subscription = serviceNetwork.like(login, password, username)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getViewState()::onLiked,
+                        getViewState()::error);
+        unsubscribeOnDestroy(subscription);
+    }
 }

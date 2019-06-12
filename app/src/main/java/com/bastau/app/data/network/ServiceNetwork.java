@@ -13,4 +13,8 @@ public interface ServiceNetwork {
     Observable<ResponseWrites> getPosts(String login, String password);
 
     Observable<ResponseAuth> getUser(String login, String password);
+
+    Observable<ResponseAuth> like(String login, String password, String username);
+
+    Observable<ResponseAuth> registration(String phone, String password, String login, String instagram);
 }

@@ -2,6 +2,7 @@ package com.bastau.app.ui.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import butterknife.ButterKnife;
 public class PostsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private Context context;
+    private Callback callback;
     private List<ResponsePosts> responseWrites = new ArrayList<>();
 
     @NonNull
@@ -50,8 +52,20 @@ public class PostsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         notifyDataSetChanged();
     }
 
+    public void setCallback(Callback callback) {
+        this.callback = callback;
+    }
+
+    public interface Callback {
+
+        void openInstagram(String uri, String username);
+
+    }
+
     public class PostsAdapterViewHolder extends BaseViewHolder {
 
+        @BindView(R.id.layout)
+        ConstraintLayout layout;
         @BindView(R.id.avatar)
         ImageView avatar;
         @BindView(R.id.name)
@@ -69,6 +83,10 @@ public class PostsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @Override
         public void onBind(int position) {
+            layout.setOnClickListener(v -> {
+                callback.openInstagram(responseWrites.get(position).getPostUrl(),
+                        responseWrites.get(position).getOwner().getUsername());
+            });
             name.setText(responseWrites.get(position).getOwner().getUsername());
             fullText.setText(responseWrites.get(position).getCaption());
             Glide

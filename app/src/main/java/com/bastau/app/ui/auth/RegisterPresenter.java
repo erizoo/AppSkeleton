@@ -22,10 +22,10 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
     }
 
     public void registration(String phone, String password, String repeatPassword, String login, String instagram) {
-        Disposable subscription = serviceNetwork.registration(phone, password,repeatPassword,login,instagram)
+        Disposable subscription = serviceNetwork.registration(phone, password, login, instagram)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(getViewState()::onLogged,
+                .subscribe(getViewState()::onSuccess,
                         getViewState()::error);
         unsubscribeOnDestroy(subscription);
     }
