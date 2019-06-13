@@ -3,6 +3,7 @@ package com.bastau.app.di.component;
 import android.content.Context;
 
 import com.bastau.app.Bastau;
+import com.bastau.app.SplashPresenter;
 import com.bastau.app.ui.MainPresenter;
 import com.bastau.app.ui.auth.AuthPresenter;
 import com.bastau.app.data.network.ServiceNetwork;
@@ -32,5 +33,7 @@ public interface ApplicationComponent {
     void inject(MainPresenter presenter);
 
     void inject(RegisterPresenter presenter);
+
+    void inject(SplashPresenter presenter);
 }
 

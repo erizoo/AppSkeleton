@@ -41,4 +41,9 @@ public class ServiceNetworkImp implements ServiceNetwork {
     public Observable<ResponseAuth> registration(String phone, String password, String login, String instagram) {
         return apiMethods.registration(phone, password, login, instagram);
     }
+
+    @Override
+    public Observable<ResponseAuth> sendToken(String token) {
+        return apiMethods.sendToken(token);
+    }
 }

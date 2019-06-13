@@ -17,4 +17,6 @@ public interface ServiceNetwork {
     Observable<ResponseAuth> like(String login, String password, String username);
 
     Observable<ResponseAuth> registration(String phone, String password, String login, String instagram);
+
+    Observable<ResponseAuth> sendToken(String token);
 }

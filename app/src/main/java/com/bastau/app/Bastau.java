@@ -16,25 +16,11 @@ import com.pixplicity.easyprefs.library.Prefs;
 
 public class Bastau extends Application {
 
-    private static final String TAG = "FirebaseApp";
     private static ApplicationComponent applicationComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(task -> {
-                    if (!task.isSuccessful()) {
-                        Log.w(TAG, "getInstanceId failed", task.getException());
-                        return;
-                    }
-                    // Get new Instance ID token
-                    String token = task.getResult().getToken();
-
-                    // Log and toast
-                    Log.d(TAG + " success", token);
-
-                });
         new Prefs.Builder()
                 .setContext(this)
                 .setMode(ContextWrapper.MODE_PRIVATE)

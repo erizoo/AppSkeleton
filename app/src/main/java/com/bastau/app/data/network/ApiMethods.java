@@ -27,4 +27,7 @@ public interface ApiMethods {
                                           @Query("password") String password,
                                           @Query("username") String login,
                                           @Query("insta") String username);
+
+    @GET("news/signup_firebaseuser")
+    Observable<ResponseAuth> sendToken(@Query("token") String token);
 }
