@@ -7,14 +7,17 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.bastau.app.data.models.ResponseAuth;
 import com.bastau.app.ui.MainActivity;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.pixplicity.easyprefs.library.Prefs;
 
-public class SplashActivity extends AppCompatActivity implements SplashView {
+public class SplashActivity extends MvpAppCompatActivity implements SplashView {
 
-
+    @InjectPresenter
+    SplashPresenter presenter;
 
     private static final String TAG = "FirebaseApp";
 
@@ -29,14 +32,20 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
                         return;
                     }
                     String token = task.getResult().getToken();
-
+                    presenter.sendToken(token);
                     Log.d(TAG + " success", token);
 
                 });
+    }
+
+    @Override
+    public void onSended(ResponseAuth responseAuth) {
         if (!Prefs.getString("LOGIN", "").equals("")){
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            new Handler().postDelayed(() -> {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }, 2000);
         } else {
             new Handler().postDelayed(() -> {
                 startActivity(new Intent(getApplicationContext(), CarouselViewActivity.class));
@@ -46,12 +55,7 @@ public class SplashActivity extends AppCompatActivity implements SplashView {
     }
 
     @Override
-    public void onSended(ResponseAuth responseAuth) {
-
-    }
-
-    @Override
     public void error(Throwable throwable) {
-
+        Log.d(TAG + " error", throwable.getMessage());
     }
 }

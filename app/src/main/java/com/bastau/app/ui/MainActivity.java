@@ -56,6 +56,12 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, Post
     LinearLayout likesLayout;
     @BindView(R.id.title)
     TextView title;
+    @BindView(R.id.points_how)
+    TextView pointsLink;
+    @BindView(R.id.points_move_link)
+    TextView pointsMoveLink;
+    @BindView(R.id.points_layout)
+    ConstraintLayout layoutPoint;
 
     private Unbinder unbinder;
     private PostsAdapter postsAdapter;
@@ -79,8 +85,10 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, Post
                 points.setVisibility(View.GONE);
                 userName.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
+                layoutPoint.setVisibility(View.GONE);
                 return true;
             case R.id.navigation_notifications:
+                layoutPoint.setVisibility(View.VISIBLE);
                 title.setText("Профиль");
                 skeletonScreen = Skeleton.bind(userLayout)
                         .load(R.layout.item_skeleton_user)
@@ -116,6 +124,17 @@ public class MainActivity extends MvpAppCompatActivity implements MainView, Post
                 .show();
 
         presenter.getPosts();
+
+        pointsLink.setOnClickListener(v -> {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("http://bbclub.kz/info/points"));
+            startActivity(i);
+        });
+        pointsMoveLink.setOnClickListener(v -> {
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse("http://bbclub.kz/info/store"));
+            startActivity(i);
+        });
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

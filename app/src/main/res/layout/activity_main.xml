@@ -30,8 +30,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:textSize="22sp"
                 android:textColor="@android:color/black"
+                android:textSize="22sp"
                 tools:text="Лента" />
 
         </android.support.v7.widget.Toolbar>
@@ -146,6 +146,80 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/points_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:visibility="gone"
+            android:background="#F7F7F7"
+            app:layout_constraintTop_toBottomOf="@id/layout_likes">
+
+            <TextView
+                android:id="@+id/points_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingStart="20dp"
+                android:text="ПОЛУЧАЙТЕ БАЛЛЫ"
+                android:textColor="#B9B9B9" />
+
+            <TextView
+                android:id="@+id/points_des"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="В начале за каждый лайк вы получаете 1 балл, когда вы наберете 100 баллов вы будете получать по 2 балла за каждый лайк, а когда 500 баллов уже по 3 балла. Растите и увеличивайте свой капитал!"
+                app:layout_constraintTop_toBottomOf="@id/points_text" />
+
+            <TextView
+                android:id="@+id/points_how"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="Как накапливать баллы"
+                android:textColor="#2196F3"
+                app:layout_constraintTop_toBottomOf="@id/points_des" />
+
+            <TextView
+                android:id="@+id/points_move"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingStart="20dp"
+                android:text="ТРАТЬТЕ БАЛЛЫ"
+                android:textColor="#B9B9B9"
+                app:layout_constraintTop_toBottomOf="@id/points_how"/>
+
+            <TextView
+                android:id="@+id/points_move_des"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="Вы можете тратить баллы на курсы и другие ценные вещи, накапливайте баллы и обменивайте их на дорогие видеокурсы или тренинги."
+                app:layout_constraintTop_toBottomOf="@id/points_move" />
+
+            <TextView
+                android:id="@+id/points_move_link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:text="Откройте магазин"
+                android:textColor="#2196F3"
+                app:layout_constraintTop_toBottomOf="@id/points_move_des" />
+
+        </android.support.constraint.ConstraintLayout>
 
 
         <android.support.v7.widget.RecyclerView
